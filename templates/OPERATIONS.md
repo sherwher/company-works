@@ -18,6 +18,10 @@
 ├── shared/outputs.md            ← 공통 산출물 양식 (템플릿 사본)
 │
 ├── docs/                        ← 살아있는 산출물 (매일 늘어남)
+│   ├── epics/
+│   │   └── EP-2026-01-<slug>.md       ← 장기 전제 (1~6개월)
+│   ├── iterations/
+│   │   └── IT-202605-01-<slug>.md     ← 반복 사이클 (1~2주)
 │   ├── prd/
 │   │   └── PRD-2026-001-<slug>.md
 │   ├── plan/
@@ -56,6 +60,8 @@
 
 | 산출물 | ID 포맷 | 예시 |
 |---|---|---|
+| Epic | `EP-YYYY-<seq>` | `EP-2026-01` |
+| Iteration | `IT-YYYYMM-<seq>` | `IT-202605-01` |
 | PRD | `PRD-YYYY-<seq>-<slug>` | `PRD-2026-001-payments` |
 | 기획서 | `PLAN-YYYY-<seq>-<slug>` | `PLAN-2026-001-payments` |
 | Design Spec | `DS-YYYY-<seq>-<slug>` | `DS-2026-001-payments` |
@@ -70,7 +76,31 @@
 
 ### 2.1 시퀀스 운영
 - `<seq>`는 해당 분류 내 일련번호. 충돌 회피를 위해 PR 머지 시점 기준으로 부여.
+- 채번 주기:
+  - **연 단위 리셋**: PRD/PLAN/DS/AISPEC/TP/ANL/CMP/Epic (`YYYY-<seq>`).
+  - **월 단위 리셋**: WU/DEC/Iteration (`YYYYMM-<seq>`). 한 달치 워크가 한눈에 보이도록.
 - 시퀀스 충돌이 잦으면 `docs/<type>/_INDEX.md`에 사용 중 ID 목록 유지.
+
+### 2.2 ID 위계와 역참조 (필수)
+
+산출물은 위계의 상위 ID를 메타데이터에 명시한다. 큰 그림을 잃지 않기 위함이다 (안티패턴 12).
+
+```
+Epic (EP-YYYY-NN)
+  └─ Iteration (IT-YYYYMM-NN)         메타: epic
+       └─ Work Unit (WU-YYYYMM-NN)    메타: epic, iteration
+            └─ Deliverable             메타: work_unit
+            └─ Decision Log (DEC-...)  본문 References에 EP/IT/WU 명시
+```
+
+규칙:
+- **Iteration**은 `epic` 필드 필수.
+- **WU**는 `epic`, `iteration` 필드 필수 (`shared/outputs.md` Work Unit 양식).
+- **PRD/PLAN/DS/AISPEC/TP/Runbook 등 Deliverable**은 메타에 `work_unit` 필수. 어느 WU의 산출물인지 추적 가능해야 G5 QA 진입에서 막힘 방지.
+- **DEC**는 본문 §6 References에 EP/IT/WU 명시. 결정의 맥락 손실 방지.
+
+진입 거부 규칙(§5.2)에 다음을 추가한다:
+- [ ] WU 메타에 `epic`/`iteration`이 없거나, 참조 ID가 실제 존재하지 않음 → 반려.
 
 ---
 

@@ -130,6 +130,8 @@ context:
 
 ```yaml
 id: WU-202605-001
+epic: EP-2026-01           # 소속 Epic (필수)
+iteration: IT-202605-01    # 소속 Iteration (필수)
 goal: <한 줄>
 inputs:
   - path: ...
@@ -141,4 +143,67 @@ deliverables:
       - "..."
 reviewers: [<role>, ...]
 deadline: <ISO8601>
+status: open | in_progress | closed
 ```
+
+## Epic (전제, 1~6개월)
+
+장기 전제. 변하지 않는 큰 그림. Owner가 1인.
+
+```yaml
+---
+id: EP-YYYY-NN
+author: pm
+owner: <name>
+status: active | paused | closed
+created: YYYY-MM-DD
+appetite: <시간/예산 상한, 예: "3개월 / 4인 풀타임">
+---
+
+# Epic - <name>
+1. Problem & Why now
+2. Objective (질적, 한 문단)
+3. Key Results (3~5개, 측정 가능)
+   - KR1: <지표 + 목표값 + 측정 방법>
+4. In-scope / Out-of-scope (Non-goals)
+5. Rabbit Holes (피해야 할 함정)
+6. References (PRD/시장 분석/이전 Epic)
+```
+
+**규칙**:
+- KR은 모두 측정 가능해야 한다 (정성 형용사만 있으면 안 됨, 안티패턴 14).
+- Epic 종료 = Owner가 status를 `closed`로 변경 + 종료 회고 1회.
+
+## Iteration (반복 사이클, 1~2주)
+
+Epic 아래에서 N회 반복되는 시간 박스. 워크플로 본문은 [`workflows/iteration.md`](../workflows/iteration.md).
+
+```yaml
+---
+id: IT-YYYYMM-NN
+epic: EP-YYYY-NN
+owner: <name>
+status: planning | in_progress | review | closed
+window: { start: YYYY-MM-DD, end: YYYY-MM-DD }
+---
+
+# Iteration - <epic-slug> #N
+
+## Plan (시작일 작성)
+- Goal: <한 줄>
+- Target KRs: [KR1, KR2]
+- WUs: [WU-..., WU-...]
+- Dev-ready 게이트 예정 횟수: <n>
+- Risks: [...]
+
+## Review (종료일 append)
+- Demo: <시연된 Deliverable>
+- Kept / Dropped / Learned / Next
+- KR 진척: <KR1: x → y>
+- 다음 IT 후보 WU: [...]
+```
+
+**규칙**:
+- Plan 없이 Execute 진입 금지.
+- Review 없이 다음 Iteration 시작 금지 (안티패턴 13).
+- Iteration이 window를 넘기면 분할하거나 Epic 재정의 — 무한 연장 금지.

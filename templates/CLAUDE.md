@@ -112,11 +112,22 @@ AI 또는 하이브리드(`generated_by != human`)로 만든 모든 산출물은
 
 | 워크플로 | 파일 |
 |---|---|
-| 신규 서비스 개발 (Full Cycle) | [workflows/full-cycle.md](./workflows/full-cycle.md) |
+| 신규 서비스 개발 (Full Cycle, Epic당 1회) | [workflows/full-cycle.md](./workflows/full-cycle.md) |
+| Iteration (반복 사이클, 1~2주) | [workflows/iteration.md](./workflows/iteration.md) |
 | 기존 서비스 기능 추가 | [workflows/feature-add.md](./workflows/feature-add.md) |
 | 마케팅/런칭 캠페인 | [workflows/campaign.md](./workflows/campaign.md) |
 | 운영/CS 세팅 | [workflows/cs-setup.md](./workflows/cs-setup.md) |
 | Dev-ready Review (개발 착수 게이트, 30분) | [workflows/dev-ready-review.md](./workflows/dev-ready-review.md) |
+
+### 6.1 작업 위계
+
+```
+Epic (EP-YYYY-NN, 1~6개월, 불변 전제)
+  └─ Iteration (IT-YYYYMM-NN, 1~2주, 시간 박스 + 회고)
+       └─ Work Unit (WU-YYYYMM-NN, 1~3일, 단일 포지션)
+```
+
+Full Cycle은 Epic 1개당 1회 통과. Iteration은 그 Epic을 N회 반복으로 쪼개 실행한다. Dev-ready Review는 Iteration 안에서 WU별로 반복 호출된다. Epic/Iteration 양식은 [`shared/outputs.md`](./shared/outputs.md), ID 규칙은 [`OPERATIONS.md`](./OPERATIONS.md) §2.
 
 ---
 
@@ -227,6 +238,9 @@ deadline: <ISO8601>
 | 9 | AI 산출물의 "완성도 착시" — HTML 시안을 개발 명세로 간주 | 데이터 모델/도메인 결손, 개발 품질 저하 |
 | 10 | "AI가 짜줬어요" — 작성자가 산출물 로직을 역추적 설명 못 함 | 오너십 부재, 리뷰어 무력화 |
 | 11 | `trust_level: L3` 미만 산출물을 다음 포지션에 핸드오프 | 개발팀이 기획·도메인 검증을 떠안음 |
+| 12 | Epic 전제 없이 WU만 쌓기 | 큰 그림 상실, 로컬 최적화 누적 |
+| 13 | Iteration 회고 없이 다음 사이클 시작 | 평가 없이 배포(AP6)의 사이클 버전 |
+| 14 | Epic Success Metrics가 측정 불가능 (정성 형용사만) | OKR 부재. 종료 판정 불가 |
 
 ---
 
