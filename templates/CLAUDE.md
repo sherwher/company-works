@@ -96,6 +96,16 @@
 공통 메타데이터/핸드오프/Decision Log는 [`shared/outputs.md`](./shared/outputs.md).
 포지션별 양식은 각 `agents/<role>.md`의 "산출물 양식" 절.
 
+### 5.1 AI 산출물 신뢰 등급 (필수)
+
+AI 또는 하이브리드(`generated_by != human`)로 만든 모든 산출물은 **L1(Draft) / L2(Verified Logic) / L3(Dev-ready)** 등급을 메타데이터에 단다 ([`shared/outputs.md`](./shared/outputs.md) §AI 산출물 신뢰 등급).
+
+핵심 규칙:
+- **개발 착수 조건은 산출물 완성이 아니라 `trust_level: L3`이다.** L3 미만은 스프린트에 투입하지 않는다.
+- 작성자는 산출물의 모든 요소에 대해 **역추적 설명** 의무를 진다 ("AI가 짜줬어요" 금지).
+- UI/HTML 산출물은 SSOT 6섹션(Visual Prototype / Data Requirements / Business Logic / Edge Cases / Prompt Intent / Dev Notes)을 함께 둔다.
+- L2→L3 승격은 [`workflows/dev-ready-review.md`](./workflows/dev-ready-review.md)의 30분 게이트에서 판정한다.
+
 ---
 
 ## 6. 워크플로
@@ -106,6 +116,7 @@
 | 기존 서비스 기능 추가 | [workflows/feature-add.md](./workflows/feature-add.md) |
 | 마케팅/런칭 캠페인 | [workflows/campaign.md](./workflows/campaign.md) |
 | 운영/CS 세팅 | [workflows/cs-setup.md](./workflows/cs-setup.md) |
+| Dev-ready Review (개발 착수 게이트, 30분) | [workflows/dev-ready-review.md](./workflows/dev-ready-review.md) |
 
 ---
 
@@ -213,6 +224,9 @@ deadline: <ISO8601>
 | 6 | 평가 없이 배포 | 품질 저하 감지 불가 |
 | 7 | 관측성 없이 운영 | 비용 폭증/장애 원인 불명 |
 | 8 | 단일 에이전트에 과도한 권한 | 보안 사고 |
+| 9 | AI 산출물의 "완성도 착시" — HTML 시안을 개발 명세로 간주 | 데이터 모델/도메인 결손, 개발 품질 저하 |
+| 10 | "AI가 짜줬어요" — 작성자가 산출물 로직을 역추적 설명 못 함 | 오너십 부재, 리뷰어 무력화 |
+| 11 | `trust_level: L3` 미만 산출물을 다음 포지션에 핸드오프 | 개발팀이 기획·도메인 검증을 떠안음 |
 
 ---
 

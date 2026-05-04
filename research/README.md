@@ -14,6 +14,7 @@
 | [`01-agent-architecture.md`](./01-agent-architecture.md) | 에이전트 아키텍처 패턴 · 프레임워크 · 도구 표준(MCP) |
 | [`02-team-workflow.md`](./02-team-workflow.md) | 팀 협업 워크플로 사례 · 핸드오프 · 코딩 에이전트 실무 |
 | [`03-hitl-governance.md`](./03-hitl-governance.md) | HITL · 권한 등급 · 거버넌스 · 실패 사례(Klarna 등) |
+| [`04-ai-artifact-trust.md`](./04-ai-artifact-trust.md) | AI 산출물 신뢰 등급(L1/L2/L3) · Dev-ready 게이트 · SSOT 6섹션 |
 
 ## 사용 방법
 
