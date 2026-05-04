@@ -108,7 +108,14 @@ AGENTS.md를 사용하는 도구는 `ln -s CLAUDE.md AGENTS.md` 또는 사본으
 
 ## 7. 운영 후 갱신
 
-- 새 포지션 추가: `agents/<new-role>.md` 작성 + CLAUDE.md S3 카탈로그 업데이트
-- 새 워크플로 추가: `workflows/<new-flow>.md` 작성 + CLAUDE.md S6 카탈로그 업데이트
+도입 이후의 운영·갱신·변화 관리는 다음 문서로 분리된다.
+
+- **운영 구조** (폴더 레이아웃, ID 규칙, AC 추적, Decision Log): [`OPERATIONS.md`](./OPERATIONS.md)
+- **템플릿 갱신과 프로젝트 동기화** (시맨틱 버전, CHANGELOG, 오버라이드): [`VERSIONING.md`](./VERSIONING.md)
+- **팀·포지션·에이전트 변화 관리** (사람 합류/이탈, 포지션 추가, 에이전트 병렬화): [`TEAM-EVOLUTION.md`](./TEAM-EVOLUTION.md)
+
+요약:
+- 새 포지션 추가: `agents/<new-role>.md` 작성 + CLAUDE.md S3 카탈로그 업데이트 (TEAM-EVOLUTION S3)
+- 새 워크플로 추가: `workflows/<new-flow>.md` 작성 + CLAUDE.md S6 카탈로그 업데이트 (TEAM-EVOLUTION S7)
 - 산출물 양식 변경: 포지션별이면 해당 `agents/<role>.md`, 공통이면 `shared/outputs.md`
-- 원칙 변경: CLAUDE.md S2 + `research/` 근거 동기화 (본 템플릿 메타 리포 정책)
+- 원칙 변경: 메타 리포 PR (VERSIONING S6)

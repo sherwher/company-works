@@ -3,7 +3,11 @@
 본 문서는 사내 AI 에이전트 협업 시스템의 **공통 규약**입니다.
 포지션별 R&R/산출물 양식/시스템 프롬프트는 [`agents/`](./agents/), 워크플로 상세는 [`workflows/`](./workflows/), 공통 산출물 양식은 [`shared/outputs.md`](./shared/outputs.md)에 분리되어 있습니다.
 
-신규 프로젝트는 [`SETUP.md`](./SETUP.md)를 따라 도입합니다.
+운영 가이드:
+- 도입 절차: [`SETUP.md`](./SETUP.md)
+- 운영 구조 (폴더/ID/Decision Log/AC 추적): [`OPERATIONS.md`](./OPERATIONS.md)
+- 템플릿 갱신·동기화: [`VERSIONING.md`](./VERSIONING.md)
+- 팀·포지션·에이전트 변화 관리: [`TEAM-EVOLUTION.md`](./TEAM-EVOLUTION.md)
 
 각 원칙의 근거는 본 템플릿이 관리되는 리포의 [`research/00-synthesis.md`](../research/00-synthesis.md)를 참조하세요.
 
