@@ -56,7 +56,7 @@ L1(Draft) 산출물은 본 회의 대상이 아니다. 작성자가 먼저 L2까
 | 판정 | 의미 | 후속 |
 |---|---|---|
 | **Ready** | `trust_level: L3` 부여, 개발 착수 가능 | BE/FE 워크플로 진입 |
-| **Ready with constraints** | 일부 범위만 L3 부여, 나머지는 보류 | 범위 명시 후 부분 착수 |
+| **Ready with constraints** | 일부 범위만 L3 부여, 나머지는 보류 | 범위 명시 후 부분 착수 (메타에 `trust_scope: partial` + `ready_scope.included/excluded` + `decision_ref`, [`shared/outputs.md`](../shared/outputs.md) §"Ready with constraints" 표기 규약) |
 | **Not ready** | 누락 항목이 많음 | 보완 후 재검토 (재회의는 30분 고정) |
 
 판정 결과는 산출물의 `validation.engineering_review`와 `trust_level`에 반영하고, Decision Log(`DEC-YYYYMM-XXX`)를 1건 생성한다.

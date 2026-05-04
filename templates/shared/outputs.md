@@ -57,6 +57,31 @@ AI/하이브리드로 만들어진 모든 산출물은 다음 3등급 중 하나
 
 승격은 [`workflows/dev-ready-review.md`](../workflows/dev-ready-review.md)의 30분 회의에서 판정한다. 판정값은 `Ready` / `Ready with constraints` / `Not ready` 3가지뿐이다.
 
+### "Ready with constraints" 표기 규약
+
+부분 승격이 발생하면 메타데이터에 다음을 모두 채운다. "어디까지 L3인가"가 산출물 1건만 봐도 명확해야 한다.
+
+```yaml
+trust_level: L3
+trust_scope: partial            # full(기본) | partial
+ready_scope:                    # trust_scope=partial일 때 필수
+  included:
+    - <승격된 화면/엔티티/모듈 ID>
+  excluded:
+    - id: <보류 항목 ID>
+      reason: <한 줄>
+      next_review: <YYYY-MM-DD 또는 IT-YYYYMM-NN>
+validation:
+  engineering_review: passed (constrained)   # passed | passed (constrained) | failed | pending
+decision_ref: DEC-YYYYMM-NNN    # Dev-ready Review에서 발급된 Decision Log
+```
+
+규칙:
+- `trust_scope`가 `partial`이면 `ready_scope.included`는 비어 있을 수 없다.
+- `excluded`의 각 항목은 `next_review`를 필수로 가진다 — 보류는 무한 보류가 아니라 "언제 다시 본다"의 약속이다.
+- `decision_ref`로 Decision Log를 역추적 가능해야 한다.
+- 다음 포지션 수신자는 `included`에 명시된 범위에 한해서만 `trust_level: L3` 산출물로 다룬다.
+
 ## SSOT 섹션 (UI/HTML 산출물 필수)
 
 UI/HTML 시안을 핸드오프할 때는 시안 본문(Visual Prototype)만으로 끝내지 않고, 다음 6섹션을 함께 둔다. AI 산출물의 결과가 아닌 **작성자의 사고**를 분리해서 보존하기 위함이다.
